@@ -17,7 +17,7 @@ fclose($pidFile);
 
 // Turn ON if current status is OFF (PID is not set in <device>_pid)
 if (strcasecmp($status,"on") == 0 && empty(trim($pid))) {
-    $pid=shell_exec('nohup /var/www/scripts/start.sh ' . $device . " > /dev/null 2>&1 & echo $!");
+    $pid=shell_exec('nohup /app/web/scripts/start.sh ' . $device . " > /dev/null 2>&1 & echo $!");
 
     $pidFile = fopen("./timers/" . $device . "_pid", "w") or die("Unable to open file!");
     fwrite($pidFile, $pid);

@@ -2,7 +2,6 @@
 header("Access-Control-Allow-Origin: *");
 
 $device = urldecode($_GET["device"]);
-$status = urldecode($_GET["status"]);
 
 $file = fopen("./timers/" . $device, "r") or die("Unable to open file!");
 $elapsed_time=fread($file, filesize("./timers/" . $device));
@@ -19,7 +18,8 @@ fclose($pidFile);
 $response = array(
     'device' => $device,
     'elapsed' => trim($elapsed_time),
-    'status' => (empty(trim($pid)) ? 'off' : 'on')
+    'status' => (empty(trim($pid)) ? 'off' : 'on'),
+    'pid' => $pid
     );
 header('Content-type:application/json;charset=utf-8');
 echo json_encode($response);
