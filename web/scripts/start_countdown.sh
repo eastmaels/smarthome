@@ -1,12 +1,13 @@
 #!/bin/bash
 device=$1
+path=/app/web
 
 while true
 do
- timeVal=$(cat ~/workspace/timers/$device)
+ timeVal=$(cat $path/timers/$device)
  timeVal=`echo $timeVal`
 
- echo $(($timeVal - 1)) > ~/workspace/timers/$device
+ echo $(($timeVal - 1)) > $path/timers/$device
 
  if [ "$timeVal" -eq "0" ] || [[ -z "${timeVal// }" ]]; then
   echo "reset timer"
@@ -20,14 +21,14 @@ do
      echo "$i"
 
      # output to monthly consumption csv
-     elapsedTime=$(cat ~/workspace/timers/$i)
-     echo "$i, $elapsedTime" >> ~/workspace/timers/monthly.csv
+     elapsedTime=$(cat $path/timers/$i)
+     echo "$i, $elapsedTime" >> $path/timers/monthly.csv
 
      # reset timer to zero
-     echo "0" > ~/workspace/timers/$i
+     echo "0" > $path/timers/$i
   done
   
-  echo "2592000" > ~/workspace/timers/$device
+  echo "2592000" > $path/timers/$device
  fi
 
  sleep 1
