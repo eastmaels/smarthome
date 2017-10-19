@@ -1,7 +1,7 @@
 <?php
 header("Access-Control-Allow-Origin: *");
 
-$device = "countdown";
+$device = strtolower(urldecode($_GET["device"]));
 $status = strtolower(urldecode($_GET["status"]));
 $timeNow = gmdate('Y-m-d h:i:s \G\M\T');
 
@@ -12,12 +12,15 @@ fclose($deviceLog);
 
 // get process id
 $pidFile = fopen("./timers/" . $device . "_pid", "r") or die("Unable to open file!");
-$pid=fread($pidFile, filesize("./timers/" . $device . "_pid"));
+$pid="";
+if (0 < filesize("./timers/" . $device . "_pid")) {
+    $pid=fread($pidFile, filesize("./timers/" . $device . "_pid"));
+}
 fclose($pidFile);
 
 // Turn ON if current status is OFF (PID is not set in <device>_pid)
 if (strcasecmp($status,"on") == 0 && empty(trim($pid))) {
-    $pid=shell_exec('nohup /var/www/scripts/start_countdown.sh ' . $device . " > /dev/null 2>&1 & echo $!");
+    $pid=shell_exec('nohup /app/web/scripts/start_countdown.sh ' . $device . " > /dev/null 2>&1 & echo $!");
 
     $pidFile = fopen("./timers/" . $device . "_pid", "w") or die("Unable to open file!");
     fwrite($pidFile, $pid);
@@ -37,7 +40,10 @@ if (strcasecmp($status,"on") == 0 && empty(trim($pid))) {
 
 // re-read pid file
 $pidFile = fopen("./timers/" . $device . "_pid", "r") or die("Unable to open file!");
-$pid=fread($pidFile, filesize("./timers/" . $device . "_pid"));
+$pid="";
+if (0 < filesize("./timers/" . $device . "_pid")) {
+    $pid=fread($pidFile, filesize("./timers/" . $device . "_pid"));
+}
 fclose($pidFile);
 
 $response = array(
