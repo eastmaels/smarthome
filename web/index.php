@@ -1,5 +1,9 @@
 <?php
 header("Access-Control-Allow-Origin: *");
+
+$result=shell_exec('chmod 777 /app/web/scripts/*");
+echo $result;
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
