@@ -211,8 +211,12 @@ header("Access-Control-Allow-Origin: *");
             $.getJSON('/countdown.php', { device : applianceId, status : "on"});
             
             // disable buttons
-            $appliance.find('.toggle-on').prop('disabled', true);
-            $appliance.find('.toggle-off').prop('disabled', false);
+            $.getJSON('/status.php', { device : applianceId}, function(data) {
+                // disable buttons
+                const isOn = (data.status === "on");
+                $appliance.find('.toggle-on').prop('disabled', isOn);
+                $appliance.find('.toggle-off').prop('disabled', !isOn);
+            });
         }
 
         function stopTimer(event) {
