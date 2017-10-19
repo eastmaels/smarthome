@@ -59,11 +59,6 @@ header("Access-Control-Allow-Origin: *");
         <div class="row">
             <div class="col-lg-12">
                 <h3>Monthly Countdown Timer</h3>
-                <h2>
-                <?php
-                    $result=shell_exec('chmod 777 /app/web/scripts/*');
-                    echo $result
-                ?>
             </div>
         </div>
 
