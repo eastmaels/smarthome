@@ -1,0 +1,1 @@
+echo outputtimer1 >> tvtimer
