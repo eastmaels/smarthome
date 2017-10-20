@@ -63,7 +63,6 @@ $result=shell_exec('chmod 777 /app/web/scripts/*');
             </div>
         </div>
 
-        <!-- Title -->
         <div class="row hero-spacer appliance" id="countdown">
             <div class="col-lg-12">
                 <p><input type="text" class="form-control timer input-lg" style="text-align: center" value="00:00:00" readonly/></p>
@@ -160,9 +159,9 @@ $result=shell_exec('chmod 777 /app/web/scripts/*');
                   <input type="text" class="form-control kwhr" /> 
                   <span class="input-group-addon" >KW/hour</span>
                 </div>
+                <button class="btn btn-default">Calculate</button>
                 <hr/>
                 <input type="text" class="form-control consumption-cost" />
-                <button class="btn btn-default">Calculate</button>
             </div>
 
             <div class="col-md-3 col-sm-6 hero-feature">
@@ -176,6 +175,21 @@ $result=shell_exec('chmod 777 /app/web/scripts/*');
 
         </div>
 
+       <hr/>
+        <div class="row">
+            <div class="col-lg-12">
+                <h3>Total Consumption</h3>
+            </div>
+        </div>
+
+        <div class="row hero-spacer">
+            <div class="col-lg-12">
+                <div class="input-group">
+                  <span class="input-group-addon" >Php</span>
+                  <input type="text" class="form-control input-lg" style="text-align: center" readonly/>
+                </div>
+            </div>
+        </div>
 
         <!-- Footer -->
         <footer>
