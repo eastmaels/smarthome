@@ -76,6 +76,9 @@ $result=shell_exec('chmod 777 /app/web/scripts/*');
             <div class="col-lg-1">
                 <button type="button" class="btn btn-warning toggle-reset">Reset</button>
             </div>
+            <div class="col-lg-1 col-lg-offset-7">
+                <button type="button" class="btn btn-warning toggle-reset-10" >Reset to 10 Seconds</button>
+            </div>
         </div>
 
         <hr/>
@@ -346,11 +349,13 @@ $result=shell_exec('chmod 777 /app/web/scripts/*');
                 var $on = $appliance.find('.toggle-on');
                 var $off = $appliance.find('.toggle-off');
                 var $reset = $appliance.find('.toggle-reset');
+                const $reset10 = $appliance.find('.toggle-reset-10');
                 
                 if ($on) {
                     $on.on("click", {appliance : $appliance}, startTimer);
                     $off.on("click", {appliance : $appliance}, stopTimer);
-                    $reset.on("click", {appliance : $appliance}, resetTimer);
+                    $reset.on("click", { appliance : $appliance }, resetTimer);
+                    $reset10.on("click", { appliance : $appliance, timeleft : 10 }, resetTimer);
                     
                     $.getJSON('/status.php', { device : applianceId}, function(data) {
                         // disable buttons
@@ -453,7 +458,9 @@ $result=shell_exec('chmod 777 /app/web/scripts/*');
         function resetTimer(event) {
             const $appliance = $(event.data.appliance);
             const applianceId = $appliance.attr('id');
-            $.getJSON('/countdown.php', { device : applianceId, status : "reset"});
+            $.getJSON('/countdown.php', 
+                { device : applianceId, status : "reset", timeleft : event.data.timeleft}
+            );
             
             // disable buttons
             $appliance.find('.toggle-on').prop('disabled', false);

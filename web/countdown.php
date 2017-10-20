@@ -3,6 +3,7 @@ header("Access-Control-Allow-Origin: *");
 
 $device = "countdown";
 $status = strtolower(urldecode($_GET["status"]));
+$timeleft = strtolower(urldecode($_GET["timeleft"]));
 $timeNow = gmdate('Y-m-d h:i:s \G\M\T');
 
 // write to device log
@@ -33,9 +34,12 @@ if (strcasecmp($status,"on") == 0 && empty(trim($pid))) {
 
 // Reset timer
 } elseif (strcasecmp($status,"reset") == 0) {
+    if (empty($timeleft)) {
+        $timeleft=2592000;
+    }    
     $kill=shell_exec("kill -9 " . $pid);
     exec("echo '' > " . "./timers/" . $device . "_pid");
-    exec("echo '2592000' > ~/workspace/timers/$device");
+    exec("echo '$timeleft' > ./timers/$device");
 }
 
 // re-read pid file
