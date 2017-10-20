@@ -140,20 +140,76 @@ $result=shell_exec('chmod 777 /app/web/scripts/*');
         <hr/>
 
         <div class="row">
-            <div class="col-lg-12">
-                <h3>Consumption Calculator</h3>
+            <div class="col-lg-3">
+                <h3>TV Consumption Calculator</h3>
+            </div>
+            <div class="col-lg-3">
+                <h3>Dining Light Consumption Calculator</h3>
+            </div>
+            <div class="col-lg-3">
+                <h3>Airconditioner Consumption Calculator</h3>
+            </div>
+            <div class="col-lg-3">
+                <h3>Bedroom Light Consumption Calculator</h3>
             </div>
         </div>
         <div class="row text-center">
             <div class="col-md-3 col-sm-6 hero-feature calculator" data-id="tv">
                 <input type="month" class="form-control month-selector" />
                 <div class="input-group">
-                  <input type="number" class="form-control hours-used" /> 
+                  <input type="number" class="form-control hours-used" readonly /> 
                   <span class="input-group-addon" >Hours Used</span>
                 </div>
                 <div class="input-group">
                   <input type="number" class="form-control wattage" /> 
-                  <span class="input-group-addon" >Wattage</span>
+                  <span class="input-group-addon" >Wattage / Hr</span>
+                </div>
+                <div class="input-group">
+                  <span class="input-group-addon" >Php</span>
+                  <input type="number" class="form-control kwh" /> 
+                  <span class="input-group-addon" >kWh</span>
+                </div>
+                <button class="btn btn-default calculate">Calculate</button>
+                <hr/>
+                <div class="input-group">
+                  <span class="input-group-addon" >Php</span>
+                  <input type="text" class="form-control consumption-cost" />
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6 hero-feature calculator" data-id="dininglight">
+                <input type="month" class="form-control month-selector" />
+                <div class="input-group">
+                  <input type="number" class="form-control hours-used" readonly /> 
+                  <span class="input-group-addon" >Hours Used</span>
+                </div>
+                <div class="input-group">
+                  <input type="number" class="form-control wattage" /> 
+                  <span class="input-group-addon" >Wattage / Hr</span>
+                </div>
+                <div class="input-group">
+                  <span class="input-group-addon" >Php</span>
+                  <input type="number" class="form-control kwh" /> 
+                  <span class="input-group-addon" >kWh</span>
+                </div>
+                <button class="btn btn-default calculate">Calculate</button>
+                <hr/>
+                <div class="input-group">
+                  <span class="input-group-addon" >Php</span>
+                  <input type="text" class="form-control consumption-cost" />
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6 hero-feature calculator" data-id="aircon">
+                <input type="month" class="form-control month-selector" />
+                <div class="input-group">
+                  <input type="number" class="form-control hours-used" readonly /> 
+                  <span class="input-group-addon" >Hours Used</span>
+                </div>
+                <div class="input-group">
+                  <span class="input-group-addon" >Php</span>
+                  <input type="number" class="form-control wattage" /> 
+                  <span class="input-group-addon" >Wattage / Hr</span>
                 </div>
                 <div class="input-group">
                   <input type="number" class="form-control kwh" /> 
@@ -167,13 +223,27 @@ $result=shell_exec('chmod 777 /app/web/scripts/*');
                 </div>
             </div>
 
-            <div class="col-md-3 col-sm-6 hero-feature">
-            </div>
-
-            <div class="col-md-3 col-sm-6 hero-feature">
-            </div>
-
-            <div class="col-md-3 col-sm-6 hero-feature">
+            <div class="col-md-3 col-sm-6 hero-feature calculator" data-id="bedroomlight">
+                <input type="month" class="form-control month-selector" />
+                <div class="input-group">
+                  <input type="number" class="form-control hours-used" readonly /> 
+                  <span class="input-group-addon" >Hours Used</span>
+                </div>
+                <div class="input-group">
+                  <span class="input-group-addon" >Php</span>
+                  <input type="number" class="form-control wattage" /> 
+                  <span class="input-group-addon" >Wattage / Hr</span>
+                </div>
+                <div class="input-group">
+                  <input type="number" class="form-control kwh" /> 
+                  <span class="input-group-addon" >kWh</span>
+                </div>
+                <button class="btn btn-default calculate">Calculate</button>
+                <hr/>
+                <div class="input-group">
+                  <span class="input-group-addon" >Php</span>
+                  <input type="text" class="form-control consumption-cost" />
+                </div>
             </div>
 
         </div>
@@ -282,10 +352,17 @@ $result=shell_exec('chmod 777 /app/web/scripts/*');
 
         function getConsumption(event) {
             const $calculator = $(event.data.calculator);
-            const $hourUsed = $calculator.find(".hours-used");
             const deviceId = $calculator.data("id");
             console.log(deviceId);
             console.log($(this).val());
+            $.getJSON('/get_consumption.php', 
+                { device : deviceId, ym : $(this).val() }, 
+                function(data) {
+                    $calculator.find(".hours-used")
+                        .val(parseFloat(parseInt(data.consumption) / 3600).toFixed(2));
+                }).fail(function() {
+                    $calculator.find(".hours-used").val(0);
+                });
         }
 
         function calculate(event) {
@@ -341,13 +418,9 @@ $result=shell_exec('chmod 777 /app/web/scripts/*');
 	        minutes = Math.floor(x % 60);
 	        x /= 60;
 	        hours = Math.floor(x % 24);
-	        if (applianceId == "countdown") {
-    	        x /= 24;
-    	        days = Math.floor(x);
-    	        return [pad2(days), pad2(hours), pad2(minutes), pad2(seconds)].join(':');
-	        } else {
-    	        return [pad2(hours), pad2(minutes), pad2(seconds)].join(':');
-	        }
+	        x /= 24;
+	        days = Math.floor(x);
+	        return [pad2(days), pad2(hours), pad2(minutes), pad2(seconds)].join(':');
 	    }
 
     </script>

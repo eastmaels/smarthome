@@ -11,8 +11,11 @@ fputcsv($deviceLog, array($device, $status, $timeNow));
 fclose($deviceLog);
 
 // get process id
-$pidFile = fopen("./timers/" . $device . "_pid", "r") or die("Unable to open file!");
-$pid=fread($pidFile, filesize("./timers/" . $device . "_pid"));
+$pidFilePath="./timers/" . $device . "_pid";
+$pidFile = fopen($pidFilePath, "r") or die("Unable to open file!");
+if (0 < filesize($pidFilePath)) {
+    $pid=fread($pidFile, filesize($pidFilePath));
+}
 fclose($pidFile);
 
 // Turn ON if current status is OFF (PID is not set in <device>_pid)
@@ -25,15 +28,11 @@ if (strcasecmp($status,"on") == 0 && empty(trim($pid))) {
     
 // Turn OFF if command/status is specified as OFF and is running (PID exists)
 } elseif (strcasecmp($status,"off") == 0 && !empty(trim($pid))) {
+    $pid="";
     $kill=shell_exec("kill -9 " . $pid);
     exec("echo '' > " . "./timers/" . $device . "_pid");
 
 }
-
-// re-read process id
-$pidFile = fopen("./timers/" . $device . "_pid", "r") or die("Unable to open file!");
-$pid=fread($pidFile, filesize("./timers/" . $device . "_pid"));
-fclose($pidFile);
 
 $response = array(
     'device' => $device,

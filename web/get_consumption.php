@@ -3,7 +3,6 @@ header("Access-Control-Allow-Origin: *");
 
 $device = urldecode($_GET["device"]);
 $ym = urldecode($_GET["ym"]);
-$ym=str_replace("-", "", $ym);
 
 $filePath="./timers/monthly/" . $device . "/" . $ym;
 $consumptionFile = fopen($filePath, "r") or die("Unable to open file!");
