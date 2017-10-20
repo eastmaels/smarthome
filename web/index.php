@@ -145,23 +145,26 @@ $result=shell_exec('chmod 777 /app/web/scripts/*');
             </div>
         </div>
         <div class="row text-center">
-            <div class="col-md-3 col-sm-6 hero-feature calculator">
+            <div class="col-md-3 col-sm-6 hero-feature calculator" data-id="tv">
                 <input type="month" class="form-control month-selector" />
                 <div class="input-group">
-                  <input type="text" class="form-control hours-used" /> 
+                  <input type="number" class="form-control hours-used" /> 
                   <span class="input-group-addon" >Hours Used</span>
                 </div>
                 <div class="input-group">
-                  <input type="text" class="form-control wattage" /> 
+                  <input type="number" class="form-control wattage" /> 
                   <span class="input-group-addon" >Wattage</span>
                 </div>
                 <div class="input-group">
-                  <input type="text" class="form-control kwhr" /> 
-                  <span class="input-group-addon" >KW/hour</span>
+                  <input type="number" class="form-control kwh" /> 
+                  <span class="input-group-addon" >kWh</span>
                 </div>
-                <button class="btn btn-default">Calculate</button>
+                <button class="btn btn-default calculate">Calculate</button>
                 <hr/>
-                <input type="text" class="form-control consumption-cost" />
+                <div class="input-group">
+                  <span class="input-group-addon" >Php</span>
+                  <input type="text" class="form-control consumption-cost" />
+                </div>
             </div>
 
             <div class="col-md-3 col-sm-6 hero-feature">
@@ -177,16 +180,19 @@ $result=shell_exec('chmod 777 /app/web/scripts/*');
 
        <hr/>
         <div class="row">
-            <div class="col-lg-12">
-                <h3>Total Consumption</h3>
+            <div class="col-lg-4 col-lg-offset-4">
+                <h3 style="text-align: center">Total Consumption</h3>
             </div>
         </div>
 
         <div class="row hero-spacer">
-            <div class="col-lg-12">
+            <div class="col-lg-4 col-lg-offset-4">
                 <div class="input-group">
                   <span class="input-group-addon" >Php</span>
-                  <input type="text" class="form-control input-lg" style="text-align: center" readonly/>
+                  <input type="number" class="form-control input-lg" id="total-consumption" style="text-align: center" readonly/>
+                  <span class="input-group-btn">
+                    <button class="btn btn-default input-lg calculate-total" type="button">Calculate</button>
+                  </span>
                 </div>
             </div>
         </div>
@@ -253,7 +259,44 @@ $result=shell_exec('chmod 777 /app/web/scripts/*');
                 }
 
             });
+            
+            $('.calculator').each(function() {
+                const $calculator = $(this);
+
+                var $calculate = $calculator.find('.calculate');
+                $calculate.on("click", { calculator : $calculator }, calculate);
+                
+                var $monthSelector = $calculator.find('.month-selector');
+                $monthSelector.on('change', { calculator : $calculator }, getConsumption);
+            });
+
+            $('.calculate-total').on('click', function() {
+               var total = 0;
+               $(".consumption-cost").each(function() {
+                  total += parseFloat($(this).val()); 
+               });
+               
+               $("#total-consumption").val(total.toFixed(2));
+            });
         });
+
+        function getConsumption(event) {
+            const $calculator = $(event.data.calculator);
+            const $hourUsed = $calculator.find(".hours-used");
+            const deviceId = $calculator.data("id");
+            console.log(deviceId);
+            console.log($(this).val());
+        }
+
+        function calculate(event) {
+            const $calculator = $(event.data.calculator);
+            const $hourUsed = $calculator.find(".hours-used");
+            const $wattage = $calculator.find(".wattage");
+            const $kwh = $calculator.find(".kwh");
+            
+            const consumption = parseFloat($hourUsed.val()) * parseFloat($wattage.val()) * parseFloat($kwh.val());
+            $calculator.find(".consumption-cost").val(consumption.toFixed(2));
+        }
 
         function startTimer(event) {
             const $appliance = $(event.data.appliance);

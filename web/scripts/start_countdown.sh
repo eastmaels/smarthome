@@ -12,7 +12,7 @@ do
 
  if [ "$timeVal" -eq "2" ]; then
   echo "Get current month before timer reaches zero"
-  currentYearMonth="$(date +'%Y/%m/%d')"
+  currentYearMonth="$(date +'%Y-%m')"
  fi
 
  if [ "$timeVal" -eq "0" ] || [[ -z "${timeVal// }" ]]; then
@@ -26,7 +26,7 @@ do
   do
      # output to monthly consumption csv
      elapsedTime=$(cat $path/timers/$i)
-     echo "$currentYearMonth,$elapsedTime" >> $path/timers/monthly/$i.csv
+     echo "$elapsedTime" >> $path/timers/monthly/$i/$currentYearMonth
 
      # reset timer to zero
      echo "0" > $path/timers/$i
