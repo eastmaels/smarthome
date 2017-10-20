@@ -1,6 +1,7 @@
 #!/bin/bash
-device=$1
 path=/app/web
+device=$1
+currentYearMonth=""
 
 while true
 do
@@ -8,6 +9,11 @@ do
  timeVal=`echo $timeVal`
 
  echo $(($timeVal - 1)) > $path/timers/$device
+
+ if [ "$timeVal" -eq "2" ]; then
+  echo "Get current month before timer reaches zero"
+  currentYearMonth="$(date +'%Y/%m/%d')"
+ fi
 
  if [ "$timeVal" -eq "0" ] || [[ -z "${timeVal// }" ]]; then
   echo "reset timer"
@@ -18,11 +24,9 @@ do
   ## now loop through the above array
   for i in "${devices[@]}"
   do
-     echo "$i"
-
      # output to monthly consumption csv
      elapsedTime=$(cat $path/timers/$i)
-     echo "$i, $elapsedTime" >> $path/timers/monthly.csv
+     echo "$currentYearMonth,$elapsedTime" >> $path/timers/monthly/$i.csv
 
      # reset timer to zero
      echo "0" > $path/timers/$i

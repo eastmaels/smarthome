@@ -1,9 +1,10 @@
 #!/bin/bash
 device=$1
+path=/app/web
 while true
 do
- timeVal=$(cat /app/web/timers/$device)
- echo $(($timeVal + 1)) > /app/web/timers/$device
- echo $(cat /app/web/timers/$device)
+ timeVal=$(cat $path/timers/$device)
+ echo $(($timeVal + 1)) > $path/timers/$device
+ echo $(cat $path/timers/$device)
  sleep 1
 done

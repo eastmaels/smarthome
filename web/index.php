@@ -138,15 +138,50 @@ $result=shell_exec('chmod 777 /app/web/scripts/*');
         </div>
         <!-- /.row -->
 
+        <hr/>
 
+        <div class="row">
+            <div class="col-lg-12">
+                <h3>Consumption Calculator</h3>
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-md-3 col-sm-6 hero-feature calculator">
+                <input type="month" class="form-control month-selector" />
+                <div class="input-group">
+                  <input type="text" class="form-control hours-used" /> 
+                  <span class="input-group-addon" >Hours Used</span>
+                </div>
+                <div class="input-group">
+                  <input type="text" class="form-control wattage" /> 
+                  <span class="input-group-addon" >Wattage</span>
+                </div>
+                <div class="input-group">
+                  <input type="text" class="form-control kwhr" /> 
+                  <span class="input-group-addon" >KW/hour</span>
+                </div>
+                <hr/>
+                <input type="text" class="form-control consumption-cost" />
+                <button class="btn btn-default">Calculate</button>
+            </div>
 
-        <hr>
+            <div class="col-md-3 col-sm-6 hero-feature">
+            </div>
+
+            <div class="col-md-3 col-sm-6 hero-feature">
+            </div>
+
+            <div class="col-md-3 col-sm-6 hero-feature">
+            </div>
+
+        </div>
+
 
         <!-- Footer -->
         <footer>
             <div class="row">
                 <div class="col-lg-12">
-                    <p>Copyright &copy; Your Website 2014</p>
+                    <p>Copyright &copy; Your Website 2017</p>
                 </div>
             </div>
         </footer>
@@ -212,12 +247,8 @@ $result=shell_exec('chmod 777 /app/web/scripts/*');
             $.getJSON('/countdown.php', { device : applianceId, status : "on"});
             
             // disable buttons
-            $.getJSON('/status.php', { device : applianceId}, function(data) {
-                // disable buttons
-                const isOn = (data.status === "on");
-                $appliance.find('.toggle-on').prop('disabled', isOn);
-                $appliance.find('.toggle-off').prop('disabled', !isOn);
-            });
+            $appliance.find('.toggle-on').prop('disabled', true);
+            $appliance.find('.toggle-off').prop('disabled', false);
         }
 
         function stopTimer(event) {

@@ -1,7 +1,7 @@
 <?php
 header("Access-Control-Allow-Origin: *");
 
-$device = strtolower(urldecode($_GET["device"]));
+$device = "countdown";
 $status = strtolower(urldecode($_GET["status"]));
 $timeNow = gmdate('Y-m-d h:i:s \G\M\T');
 
