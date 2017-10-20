@@ -169,7 +169,15 @@ $result=shell_exec('chmod 777 /app/web/scripts/*');
                   <input type="number" class="form-control kwh" /> 
                   <span class="input-group-addon" >kWh</span>
                 </div>
-                <button class="btn btn-default calculate">Calculate</button>
+                <button class="btn btn-primary calculate">Calculate</button>
+                <div class="btn-group">
+                  <button class="btn btn-default save">Save</button>
+                  <button class="btn btn-default load">Load</button>
+                </div>
+                <div class="alert alert-success alert-dismissible notification" role="alert" style="display: none;">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                   Saved.
+                </div>
                 <hr/>
                 <div class="input-group">
                   <span class="input-group-addon" >Php</span>
@@ -192,7 +200,16 @@ $result=shell_exec('chmod 777 /app/web/scripts/*');
                   <input type="number" class="form-control kwh" /> 
                   <span class="input-group-addon" >kWh</span>
                 </div>
-                <button class="btn btn-default calculate">Calculate</button>
+                <button class="btn btn-primary calculate">Calculate</button>
+                <div class="btn-group">
+                  <button class="btn btn-default save">Save</button>
+                  <button class="btn btn-default load">Load</button>
+                </div>
+                <div class="alert alert-success alert-dismissible notification" role="alert" style="display: none;">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                   Saved.
+                </div>
+
                 <hr/>
                 <div class="input-group">
                   <span class="input-group-addon" >Php</span>
@@ -215,7 +232,15 @@ $result=shell_exec('chmod 777 /app/web/scripts/*');
                   <input type="number" class="form-control kwh" /> 
                   <span class="input-group-addon" >kWh</span>
                 </div>
-                <button class="btn btn-default calculate">Calculate</button>
+                <button class="btn btn-primary calculate">Calculate</button>
+                <div class="btn-group">
+                  <button class="btn btn-default save">Save</button>
+                  <button class="btn btn-default load">Load</button>
+                </div>
+                <div class="alert alert-success alert-dismissible notification" role="alert" style="display: none;">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                   Saved.
+                </div>
                 <hr/>
                 <div class="input-group">
                   <span class="input-group-addon" >Php</span>
@@ -238,7 +263,15 @@ $result=shell_exec('chmod 777 /app/web/scripts/*');
                   <input type="number" class="form-control kwh" /> 
                   <span class="input-group-addon" >kWh</span>
                 </div>
-                <button class="btn btn-default calculate">Calculate</button>
+                <button class="btn btn-primary calculate">Calculate</button>
+                <div class="btn-group">
+                  <button class="btn btn-default save">Save</button>
+                  <button class="btn btn-default load">Load</button>
+                </div>
+                <div class="alert alert-success alert-dismissible notification" role="alert" style="display: none;">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                   Saved.
+                </div>
                 <hr/>
                 <div class="input-group">
                   <span class="input-group-addon" >Php</span>
@@ -332,12 +365,34 @@ $result=shell_exec('chmod 777 /app/web/scripts/*');
             
             $('.calculator').each(function() {
                 const $calculator = $(this);
+                const deviceId = $calculator.data("id");
+
+                var $monthSelector = $calculator.find('.month-selector');
+                $monthSelector.on('change', { calculator : $calculator }, getConsumption);
 
                 var $calculate = $calculator.find('.calculate');
                 $calculate.on("click", { calculator : $calculator }, calculate);
+
+                const $hoursUsed = $calculator.find('.hours-used');
+                const $wattage = $calculator.find('.wattage');
+                const $kwh = $calculator.find('.kwh');
                 
-                var $monthSelector = $calculator.find('.month-selector');
-                $monthSelector.on('change', { calculator : $calculator }, getConsumption);
+                var $save = $calculator.find('.save');
+                $save.on("click", { calculator : $calculator }, function() {
+                    localStorage.setItem(deviceId + "ym", $monthSelector.val());
+                    localStorage.setItem(deviceId + "wattage", $wattage.val());
+                    localStorage.setItem(deviceId + "kwh", $kwh.val());
+                    $calculator.find(".notification").fadeIn("slow").delay(500).fadeOut("slow");
+                });
+
+                var $load = $calculator.find('.load');
+                $load.on("click", { calculator : $calculator }, function() {
+                    $monthSelector.val(localStorage.getItem(deviceId + "ym"));
+                    $monthSelector.trigger('change');
+                    $wattage.val(localStorage.getItem(deviceId + "wattage"));
+                    $kwh.val(localStorage.getItem(deviceId + "kwh"));
+                });
+                
             });
 
             $('.calculate-total').on('click', function() {
