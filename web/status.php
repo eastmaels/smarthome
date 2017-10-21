@@ -28,9 +28,9 @@ if (strcasecmp($status,"on") == 0 && empty(trim($pid))) {
     
 // Turn OFF if command/status is specified as OFF and is running (PID exists)
 } elseif (strcasecmp($status,"off") == 0 && !empty(trim($pid))) {
-    $pid="";
     $kill=shell_exec("kill -9 " . $pid);
     exec("echo '' > " . "./timers/" . $device . "_pid");
+    $pid="";
 
 }
 
