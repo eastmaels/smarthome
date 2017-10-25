@@ -164,12 +164,12 @@ $result=shell_exec('chmod 777 /app/web/scripts/*');
                   <span class="input-group-addon" >Hours Used</span>
                 </div>
                 <div class="input-group">
-                  <input type="number" class="form-control wattage" /> 
+                  <input type="number" class="form-control wattage" value="25"/> 
                   <span class="input-group-addon" >Wattage / Hr</span>
                 </div>
                 <div class="input-group">
                   <span class="input-group-addon" >Php</span>
-                  <input type="number" class="form-control kwh" /> 
+                  <input type="number" class="form-control kwh" value="0.40"/> 
                   <span class="input-group-addon" >kWh</span>
                 </div>
                 <button class="btn btn-primary calculate">Calculate</button>
@@ -195,12 +195,12 @@ $result=shell_exec('chmod 777 /app/web/scripts/*');
                   <span class="input-group-addon" >Hours Used</span>
                 </div>
                 <div class="input-group">
-                  <input type="number" class="form-control wattage" /> 
+                  <input type="number" class="form-control wattage" value="12"/> 
                   <span class="input-group-addon" >Wattage / Hr</span>
                 </div>
                 <div class="input-group">
                   <span class="input-group-addon" >Php</span>
-                  <input type="number" class="form-control kwh" /> 
+                  <input type="number" class="form-control kwh" value="0.40"/> 
                   <span class="input-group-addon" >kWh</span>
                 </div>
                 <button class="btn btn-primary calculate">Calculate</button>
@@ -228,11 +228,11 @@ $result=shell_exec('chmod 777 /app/web/scripts/*');
                 </div>
                 <div class="input-group">
                   <span class="input-group-addon" >Php</span>
-                  <input type="number" class="form-control wattage" /> 
+                  <input type="number" class="form-control wattage" value="559.5"/> 
                   <span class="input-group-addon" >Wattage / Hr</span>
                 </div>
                 <div class="input-group">
-                  <input type="number" class="form-control kwh" /> 
+                  <input type="number" class="form-control kwh" value="0.40"/> 
                   <span class="input-group-addon" >kWh</span>
                 </div>
                 <button class="btn btn-primary calculate">Calculate</button>
@@ -259,11 +259,11 @@ $result=shell_exec('chmod 777 /app/web/scripts/*');
                 </div>
                 <div class="input-group">
                   <span class="input-group-addon" >Php</span>
-                  <input type="number" class="form-control wattage" /> 
+                  <input type="number" class="form-control wattage" value="10"/> 
                   <span class="input-group-addon" >Wattage / Hr</span>
                 </div>
                 <div class="input-group">
-                  <input type="number" class="form-control kwh" /> 
+                  <input type="number" class="form-control kwh" value="0.40"/> 
                   <span class="input-group-addon" >kWh</span>
                 </div>
                 <button class="btn btn-primary calculate">Calculate</button>
