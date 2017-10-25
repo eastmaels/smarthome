@@ -117,7 +117,7 @@ $result=shell_exec('chmod 777 /app/web/scripts/*');
 
             <div class="col-md-3 col-sm-6 hero-feature appliance" id="aircon">
                 <div class="thumbnail">
-                    <img src="images/air-conditioner.png" alt="">
+                    <img src="images/air-conditioner.jpg" alt="">
                     <div class="caption">
                         <h3>Airconditioner</h3>
                         <p><input type="text" class="form-control timer" value="00:00:00" readonly/></p>
@@ -128,7 +128,7 @@ $result=shell_exec('chmod 777 /app/web/scripts/*');
 
             <div class="col-md-3 col-sm-6 hero-feature appliance" id="bedroomlight">
                 <div class="thumbnail">
-                    <img src="images/bedroom-light.jpeg" alt="">
+                    <img src="images/bedroom-light.jpg" alt="">
                     <div class="caption">
                         <h3>Bedroom Light</h3>
                         <p><input type="text" class="form-control timer" value="00:00:00" readonly/></p>
