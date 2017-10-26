@@ -174,8 +174,8 @@ $result=shell_exec('chmod 777 /app/web/scripts/*');
                 </div>
                 <button class="btn btn-primary calculate">Calculate</button>
                 <div class="btn-group">
-                  <button class="btn btn-default save">Save</button>
-                  <button class="btn btn-default load">Load</button>
+                  <button class="btn btn-default save" style="display:none">Save</button>
+                  <button class="btn btn-default load" style="display:none">Load</button>
                 </div>
                 <div class="alert alert-success alert-dismissible notification" role="alert" style="display: none;">
                   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -205,8 +205,8 @@ $result=shell_exec('chmod 777 /app/web/scripts/*');
                 </div>
                 <button class="btn btn-primary calculate">Calculate</button>
                 <div class="btn-group">
-                  <button class="btn btn-default save">Save</button>
-                  <button class="btn btn-default load">Load</button>
+                  <button class="btn btn-default save" style="display:none">Save</button>
+                  <button class="btn btn-default load" style="display:none">Load</button>
                 </div>
                 <div class="alert alert-success alert-dismissible notification" role="alert" style="display: none;">
                   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -237,8 +237,8 @@ $result=shell_exec('chmod 777 /app/web/scripts/*');
                 </div>
                 <button class="btn btn-primary calculate">Calculate</button>
                 <div class="btn-group">
-                  <button class="btn btn-default save">Save</button>
-                  <button class="btn btn-default load">Load</button>
+                  <button class="btn btn-default save" style="display:none">Save</button>
+                  <button class="btn btn-default load" style="display:none">Load</button>
                 </div>
                 <div class="alert alert-success alert-dismissible notification" role="alert" style="display: none;">
                   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -268,8 +268,8 @@ $result=shell_exec('chmod 777 /app/web/scripts/*');
                 </div>
                 <button class="btn btn-primary calculate">Calculate</button>
                 <div class="btn-group">
-                  <button class="btn btn-default save">Save</button>
-                  <button class="btn btn-default load">Load</button>
+                  <button class="btn btn-default save" style="display:none">Save</button>
+                  <button class="btn btn-default load" style="display:none">Load</button>
                 </div>
                 <div class="alert alert-success alert-dismissible notification" role="alert" style="display: none;">
                   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
