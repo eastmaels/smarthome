@@ -169,7 +169,7 @@ $result=shell_exec('chmod 777 /app/web/scripts/*');
                 </div>
                 <div class="input-group">
                   <span class="input-group-addon" >Php</span>
-                  <input type="number" class="form-control kwh" value="0.40"/> 
+                  <input type="number" class="form-control kwh" value="0.00989"/> 
                   <span class="input-group-addon" >kWh</span>
                 </div>
                 <button class="btn btn-primary calculate">Calculate</button>
@@ -200,7 +200,7 @@ $result=shell_exec('chmod 777 /app/web/scripts/*');
                 </div>
                 <div class="input-group">
                   <span class="input-group-addon" >Php</span>
-                  <input type="number" class="form-control kwh" value="0.40"/> 
+                  <input type="number" class="form-control kwh" value="0.00989"/> 
                   <span class="input-group-addon" >kWh</span>
                 </div>
                 <button class="btn btn-primary calculate">Calculate</button>
@@ -232,7 +232,7 @@ $result=shell_exec('chmod 777 /app/web/scripts/*');
                 </div>
                 <div class="input-group">
                   <span class="input-group-addon" >Php</span>
-                  <input type="number" class="form-control kwh" value="0.40"/> 
+                  <input type="number" class="form-control kwh" value="0.00989"/> 
                   <span class="input-group-addon" >kWh</span>
                 </div>
                 <button class="btn btn-primary calculate">Calculate</button>
@@ -263,7 +263,7 @@ $result=shell_exec('chmod 777 /app/web/scripts/*');
                 </div>
                 <div class="input-group">
                   <span class="input-group-addon" >Php</span>
-                  <input type="number" class="form-control kwh" value="0.40"/> 
+                  <input type="number" class="form-control kwh" value="0.00989"/> 
                   <span class="input-group-addon" >kWh</span>
                 </div>
                 <button class="btn btn-primary calculate">Calculate</button>
