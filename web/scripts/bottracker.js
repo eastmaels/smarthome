@@ -26,10 +26,12 @@ $(function () {
       $('#bot_list').append('<option value="' + bot.name + '">' + bot.name + '</option>');
     });
 
+/*
     try {
         if (Notification && Notification.permission !== "granted")
             Notification.requestPermission();
     } catch (err) { }
+*/
 
     function sendNotification(bot, bid) {
         try {
@@ -547,8 +549,8 @@ $(function () {
 
             td = $(document.createElement('td'));
             var bar = $('#randowhale-progress div').clone();
-            console.log(bot.power);
-            var pct = (bot.power - 90) * 10;
+
+            var pct = (bot.power - 80) * 10;
             bar.attr('aria-valuenow', pct);
             bar.css('width', pct + '%');
             bar.text(bot.power.formatMoney());
@@ -579,8 +581,8 @@ $(function () {
 
     }
 
-    setTimeout(loadBotInfo, 5 * 1000);
-    setTimeout(loadAccountInfo, 5 * 1000);
+    //setTimeout(loadBotInfo, 5 * 1000);
+    //setTimeout(loadAccountInfo, 5 * 1000);
     setInterval(updateTimers, 1000);
     setTimeout(loadContribBotInfo, 5 * 1000);
 
