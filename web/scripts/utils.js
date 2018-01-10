@@ -55,6 +55,7 @@ var n = this,
  var totalVestingFund;
  var totalVestingShares;
  function updateSteemVariables() {
+     steem.api.setOptions({ url: 'https://api.steemit.com/' });
      steem.api.getRewardFund("post", function (e, t) {
          rewardBalance = parseFloat(t.reward_balance.replace(" STEEM", ""));
          recentClaims = t.recent_claims;
